@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+
+        FlipDirection();
     }
 
     private void Move()
@@ -39,6 +41,20 @@ public class PlayerController : MonoBehaviour
         theRb.linearVelocity = moveInput.action.ReadValue<Vector2>().normalized * moveSpeed;
 
         anim.SetFloat("Speed", theRb.linearVelocity.magnitude);
+    }
+
+    private void FlipDirection()
+    {
+
+        if (theRb.linearVelocity.x < 0f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        }
+        else if (theRb.linearVelocity.x > 0f)
+		{
+            transform.localScale = Vector3.one;
+		}
     }
 
 }
