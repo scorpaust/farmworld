@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = FindAnyObjectByType<PlayerController>().transform;
+        target = PlayerController.instance.transform;
 
         SetupCamera();
     }
