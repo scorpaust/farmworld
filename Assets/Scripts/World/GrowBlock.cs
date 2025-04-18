@@ -25,6 +25,11 @@ public class GrowBlock : MonoBehaviour
 		{
 			return spriteRenderer;
 		}
+
+        set
+        {
+            spriteRenderer = value;
+        }
 	}
 
 	[SerializeField]
@@ -53,7 +58,16 @@ public class GrowBlock : MonoBehaviour
 
     public bool PreventUse { get { return preventUse; } set { preventUse = value; } }
 
+    [SerializeField]
+    private CropType cropType;
+
+    public CropType CropType { get { return cropType; } set { cropType = value; } }
+    
     private Vector2Int gridPos;
+
+    private float growthFailChance;
+
+    public float GrowthFailChance { get {  return growthFailChance; } set { growthFailChance = value; } }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
@@ -70,40 +84,41 @@ public class GrowBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         #if UNITY_EDITOR
-            if (Keyboard.current.nKey.wasPressedThisFrame)
-            {
-                AdvanceCrop();
-            }
+                    if (Keyboard.current.nKey.wasPressedThisFrame)
+                    {
+                        AdvanceCrop();
+                    }
         #endif
     }
 
     public void UpdateCropSprite()
     {
+        CropInfo activeCrop = CropController.Instance.GetCropInfo(cropType);
+
         switch(currentStage)
         {
             case GrowthStage.planted:
 
-                cropSr.sprite = cropPlanted;
+                cropSr.sprite = activeCrop.planted;
 
                 break;
 
             case GrowthStage.growing1:
 
-                cropSr.sprite = cropGrowing1;
+                cropSr.sprite = activeCrop.growStage1;
 
                 break;
 
             case GrowthStage.growing2:
 
-                cropSr.sprite = cropGrowing2;
+                cropSr.sprite = activeCrop.growStage2;
 
                 break;
 
             case GrowthStage.ripe:
 
-                cropSr.sprite = cropRipe;
+                cropSr.sprite = activeCrop.ripe;
 
                 break;
         }
@@ -158,11 +173,15 @@ public class GrowBlock : MonoBehaviour
         }
     }
 
-    public void PlantCrop()
+    public void PlantCrop(CropType cropToPlant)
     {
         if (currentStage == GrowthStage.ploughed && IsWatered && !preventUse)
         {
             currentStage = GrowthStage.planted;
+
+            cropType = cropToPlant;
+
+            growthFailChance = CropController.Instance.GetCropInfo(cropToPlant).growthFailChance;
 
             UpdateCropSprite();
         }
@@ -183,7 +202,7 @@ public class GrowBlock : MonoBehaviour
                 UpdateCropSprite();
             }
         }
-    }
+	}
 
     public void HarvestCrop()
     {
@@ -194,6 +213,8 @@ public class GrowBlock : MonoBehaviour
             SetSoilSprite();
 
             cropSr.sprite = null;
+
+            CropController.Instance.AddCrop(cropType);
         }
     }
 

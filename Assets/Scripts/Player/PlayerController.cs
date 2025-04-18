@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
 
     public bool CanUseTools = true;
 
+    [SerializeField]
+    private CropType seedCropType;
+
+    public CropType SeedCropType {  get { return seedCropType; } private set { } }
+
 	private void Awake()
 	{
         if (instance == null)
@@ -227,9 +232,14 @@ public class PlayerController : MonoBehaviour
 
 				case ToolType.seeds:
 
-                    block.PlantCrop();
+                    if (CropController.Instance.GetCropInfo(seedCropType).seedAmount > 0)
+                    {
+						block.PlantCrop(seedCropType);
 
-					break;
+						CropController.Instance.UseSeed(seedCropType);
+					}
+
+                    break;
 
 				case ToolType.basket:
 

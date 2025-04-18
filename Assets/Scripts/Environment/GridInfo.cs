@@ -56,42 +56,61 @@ public class GridInfo : MonoBehaviour
         theGrid[yPos].Blocks[xPos].CurrentStage = theBlock.currentStage;
 
 		theGrid[yPos].Blocks[xPos].IsWatered = theBlock.IsWatered;
+
+		theGrid[yPos].Blocks[xPos].CropType = theBlock.CropType;
+
+		theGrid[yPos].Blocks[xPos].GrowthFailChance = theBlock.GrowthFailChance;
 	}
 
     public void GrowCrop()
     {
-
 		for (int y = 0; y < theGrid.Count; y++)
         {
             for (int x = 0; x < theGrid[y].Blocks.Count; x++)
             {
                 if (theGrid[y].Blocks[x].IsWatered == true)
                 {
-                    switch (theGrid[y].Blocks[x].CurrentStage)
+                    float growthFailTest = Random.Range(0f, 100f);
+
+                    if (growthFailTest > theGrid[y].Blocks[x].GrowthFailChance)
                     {
-                        case GrowBlock.GrowthStage.planted:
+                        switch (theGrid[y].Blocks[x].CurrentStage)
+                        {
+                            case GrowBlock.GrowthStage.planted:
 
-                            theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.growing1;
+                                theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.growing1;
 
-                            break;
+                                break;
 
-						case GrowBlock.GrowthStage.growing1:
+						    case GrowBlock.GrowthStage.growing1:
 
-							theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.growing2;
+							    theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.growing2;
 
-							break;
+							    break;
 
-						case GrowBlock.GrowthStage.growing2:
+						    case GrowBlock.GrowthStage.growing2:
 
-							theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.ripe;
+							    theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.ripe;
 
-							break;
-					}
+							    break;
+					    }
+                    }
 
                     GridController.instance.BlockRows[y].blocks[x].AdvanceCrop();
 
 					theGrid[y].Blocks[x].IsWatered = false;
                 }
+
+                if (theGrid[y].Blocks[x].CurrentStage == GrowBlock.GrowthStage.ploughed)
+                {
+					theGrid[y].Blocks[x].CurrentStage = GrowBlock.GrowthStage.barren;
+
+					var block = GridController.instance.BlockRows[y].blocks[x];
+					block.currentStage = GrowBlock.GrowthStage.barren;
+
+					block.SetSoilSprite();
+					block.UpdateCropSprite();
+				}
             }
         }
     }
@@ -115,6 +134,10 @@ public class BlockInfo
     private GrowBlock.GrowthStage currentStage;
 
     public GrowBlock.GrowthStage CurrentStage { get { return currentStage; } set { currentStage = value; } }
+
+    public CropType CropType;
+
+    public float GrowthFailChance;
 }
 
 [System.Serializable]
@@ -122,5 +145,5 @@ public class InfoRow
 {
     private List<BlockInfo> blocks = new List<BlockInfo>();
 
-    public List<BlockInfo> Blocks { get { return blocks; } }
+    public List<BlockInfo> Blocks { get { return blocks; } set { blocks = value; } }
 }

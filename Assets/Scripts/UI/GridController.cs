@@ -90,6 +90,10 @@ public class GridController : MonoBehaviour
 
                     newBlock.IsWatered = storedBlock.IsWatered;
 
+                    newBlock.CropType = storedBlock.CropType;
+
+                    newBlock.GrowthFailChance = storedBlock.GrowthFailChance;
+
                     newBlock.SetSoilSprite();
 
                     newBlock.UpdateCropSprite();

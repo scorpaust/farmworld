@@ -316,6 +316,131 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &109501953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109501954}
+  - component: {fileID: 109501955}
+  m_Layer: 0
+  m_Name: Crop Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109501954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109501953}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109501955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109501953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c7d91d9483613448ec8d528a95ccc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropList:
+  - cropType: 0
+    finalCrop: {fileID: 6761164967045977113, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: 8132948862792318974, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: -1927889906097043966, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: 5004531278555049960, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: -5395861003456798081, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: -6800931340347744238, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 15
+  - cropType: 1
+    finalCrop: {fileID: 5508725064705088119, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: 2614870373251885436, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: 3057675692530835814, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -8321886959466736737, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: 2069992328310058220, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: -862800679913824809, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 10
+  - cropType: 2
+    finalCrop: {fileID: -68751727340038015, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: -2693009140137883590, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: -3521152321408532758, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -385290471789066283, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: -4231635334726906192, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: 3390126664149698875, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 100
+    cropAmount: 0
+    growthFailChance: 12
+  - cropType: 3
+    finalCrop: {fileID: 6099581493293703690, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: -956252262595852801, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: 4759676146435412010, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -2943151524547710194, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: -7037530020992878781, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: -3800458654278106549, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 5
+  - cropType: 4
+    finalCrop: {fileID: -5428206428529569624, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: 6738218706411903907, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: 968803793874081956, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -5286125387984224900, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: -5119893442609476536, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: 2393381137972445386, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 8
+  - cropType: 5
+    finalCrop: {fileID: -7833671090200325546, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: -6338023803479276477, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: -5568842699155709627, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -2185335503829088403, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: 6915438452729039185, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: 6984442412936397737, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 20
+  - cropType: 6
+    finalCrop: {fileID: 5860025163644826426, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: 6395214293025444372, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: -454235979964385530, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -9045544968778989044, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: 7706506614371038907, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: 1552293971409657765, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 18
+  - cropType: 7
+    finalCrop: {fileID: -7583409310137716746, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    seedType: {fileID: -4538752222985096420, guid: 688a17423db43294093ccb5c6916461b, type: 3}
+    planted: {fileID: -5568842699155709627, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage1: {fileID: -2185335503829088403, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    growStage2: {fileID: 6915438452729039185, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    ripe: {fileID: 6984442412936397737, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
+    seedAmount: 5
+    cropAmount: 0
+    growthFailChance: 30
 --- !u!1 &124888890
 GameObject:
   m_ObjectHideFlags: 0
@@ -12206,6 +12331,8 @@ MonoBehaviour:
   currentTime: 0
   dayStart: 7
   dayEnd: 26
+  timeSpeed: 0.25
+  currentDay: 1
 --- !u!4 &661057017
 Transform:
   m_ObjectHideFlags: 0
@@ -12333,6 +12460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanUseTools: 1
+  seedCropType: 2
   theRb: {fileID: 937385171}
   anim: {fileID: 20553559}
   moveInput: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
@@ -38213,6 +38341,7 @@ MonoBehaviour:
   cropGrowing2: {fileID: -5395861003456798081, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
   cropRipe: {fileID: -6800931340347744238, guid: b6442a289c143044196d4aeda5e7ba25, type: 3}
   preventUse: 0
+  cropType: 0
 --- !u!4 &1939269275
 Transform:
   m_ObjectHideFlags: 0
@@ -38832,3 +38961,4 @@ SceneRoots:
   - {fileID: 500003266}
   - {fileID: 1504625255}
   - {fileID: 661057017}
+  - {fileID: 109501954}
