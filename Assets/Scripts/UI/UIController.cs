@@ -1,18 +1,28 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UIController : MonoBehaviour
 {
     public static UIController Instance;
 
     [SerializeField]
-    private GameObject[] toolbarActivators;
+	private GameObject[] toolbarActivators;
 
     [SerializeField]
     private TMP_Text timeText;
 
     public TMP_Text TimeText { get { return timeText; } private set { } }
+
+    [SerializeField]
+    private InventoryController invControl;
+
+    public InventoryController InvControl { get { return invControl; } private set { } }
+
+    [SerializeField]
+    private Image seedImage;
 
     private DayTransitionUI dayTransitionPanel;
 
@@ -37,7 +47,15 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ManageInventory();
+    }
+
+    private void ManageInventory()
+    {
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            invControl.OpenClose();
+        }
     }
 
     public void DeactivateToolbarActivators()
@@ -85,5 +103,10 @@ public class UIController : MonoBehaviour
         {
             dayTransitionPanel.ShowDayTransition(TimeController.Instance.CurrentDay);
 		}
+    }
+
+    public void SwitchSeed(CropType crop)
+    {
+        seedImage.sprite = CropController.Instance.GetCropInfo(crop).seedType;
     }
 }

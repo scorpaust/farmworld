@@ -80,6 +80,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsInInventoryMode())
+        {
+            theRb.linearVelocity = Vector2.zero;
+
+            return;
+        }
+
         if (toolWaitCounter > 0)
         {
             toolWaitCounter -= Time.deltaTime;
@@ -236,7 +243,7 @@ public class PlayerController : MonoBehaviour
                     {
 						block.PlantCrop(seedCropType);
 
-						CropController.Instance.UseSeed(seedCropType);
+						//CropController.Instance.UseSeed(seedCropType);
 					}
 
                     break;
@@ -248,5 +255,23 @@ public class PlayerController : MonoBehaviour
 					break;
 			}
         }
+    }
+
+    private bool IsInInventoryMode()
+    {
+        if (UIController.Instance != null)
+        {
+            if (UIController.Instance.InvControl != null)
+            {
+                return UIController.Instance.InvControl.isActiveAndEnabled;
+            }
+        }
+
+        return false;
+    }
+
+    public void SwitchSeed(CropType newSeed)
+    {
+        seedCropType = newSeed;
     }
 }
