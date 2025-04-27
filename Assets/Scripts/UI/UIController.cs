@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -21,10 +22,25 @@ public class UIController : MonoBehaviour
 
     public InventoryController InvControl { get { return invControl; } private set { } }
 
-    [SerializeField]
+	[SerializeField]
+	private ShopController shopControl;
+
+	public ShopController ShopControl { get { return shopControl; } private set { } }
+
+	[SerializeField]
     private Image seedImage;
 
     private DayTransitionUI dayTransitionPanel;
+
+    [SerializeField]
+    private TMP_Text moneyText;
+
+    public TMP_Text MoneyText {  get { return moneyText; } set { moneyText = value; } }
+
+    [SerializeField]
+    private GameObject pauseScreen;
+
+    public GameObject PauseScreen {  get { return pauseScreen; } private set { } }
 
 	private void Awake()
 	{
@@ -48,6 +64,16 @@ public class UIController : MonoBehaviour
     void Update()
     {
         ManageInventory();
+
+#if UNITY_EDITOR
+
+        ManageShop();
+#endif
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            PauseUnpause();
+        }
     }
 
     private void ManageInventory()
@@ -58,7 +84,15 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void DeactivateToolbarActivators()
+	private void ManageShop()
+	{
+		if (Keyboard.current.bKey.wasPressedThisFrame)
+		{
+			shopControl.OpenClose();
+		}
+	}
+
+	public void DeactivateToolbarActivators()
     {
         foreach (GameObject icon in toolbarActivators)
         {
@@ -97,16 +131,65 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+    public void UpdateMoneyText(float currentMoney)
+    {
+        moneyText.text = currentMoney + " €";
+	}
+
     public void ActivateEndDayTransition()
     {
         if (TimeController.Instance != null)
         {
             dayTransitionPanel.ShowDayTransition(TimeController.Instance.CurrentDay);
+
+			AudioManager.Instance.PauseMusic();
+
+			AudioManager.Instance.PlaySFX(1);
 		}
     }
 
     public void SwitchSeed(CropType crop)
     {
         seedImage.sprite = CropController.Instance.GetCropInfo(crop).seedType;
+
+		AudioManager.Instance.PlaySFXPitchAdjust(5);
+	}
+
+    public void PauseUnpause()
+    {
+        if (!pauseScreen.activeSelf)
+        {
+            pauseScreen.SetActive(true);
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            pauseScreen.SetActive(false);
+
+            Time.timeScale = 1f;
+        }
+
+		AudioManager.Instance.PlaySFXPitchAdjust(5);
+	}
+
+    public void BackToMainMenu()
+    {
+		Time.timeScale = 1f;
+
+		SceneManager.LoadScene("Menu");
+
+        Destroy(gameObject);
+
+        Destroy(PlayerController.instance.gameObject);
+
+        Destroy(TimeController.Instance.gameObject);
+
+          Destroy(CurrencyController.Instance.gameObject);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

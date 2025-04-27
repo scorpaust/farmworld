@@ -38,6 +38,10 @@ public class DayTransitionUI : MonoBehaviour
 		yield return StartCoroutine(FadeCanvas(1f, 0f));
 
 		PlayerController.instance.gameObject.transform.position = new Vector3(2.4f, -4.14f, 0f);
+
+		yield return new WaitForEndOfFrame();
+
+		AudioManager.Instance.ResumeMusic();
 	}
 
 	private IEnumerator FadeCanvas(float startAlpha, float endAlpha)

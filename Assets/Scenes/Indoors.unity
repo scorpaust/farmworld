@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 512911054}
   - component: {fileID: 512911056}
   - component: {fileID: 512911055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 580527412}
   - component: {fileID: 580527411}
   - component: {fileID: 580527410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hard Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2011,7 +2011,7 @@ GameObject:
   - component: {fileID: 1321308677}
   - component: {fileID: 1321308679}
   - component: {fileID: 1321308678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3038,7 +3038,7 @@ GameObject:
   - component: {fileID: 1874637531}
   - component: {fileID: 1874637533}
   - component: {fileID: 1874637532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hard Objects Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}

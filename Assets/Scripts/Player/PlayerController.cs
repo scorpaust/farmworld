@@ -75,12 +75,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         UIController.Instance.SwitchTool((int)CurrentTool);
-    }
+
+		UIController.Instance.SwitchSeed(seedCropType);
+	}
 
     // Update is called once per frame
     void Update()
     {
-        if (IsInInventoryMode())
+        if (IsInInventoryMode() || IsInShopMode() || IsGamePaused())
         {
             theRb.linearVelocity = Vector2.zero;
 
@@ -265,6 +267,36 @@ public class PlayerController : MonoBehaviour
             {
                 return UIController.Instance.InvControl.isActiveAndEnabled;
             }
+        }
+
+        return false;
+    }
+
+    private bool IsInShopMode()
+    {
+		if (UIController.Instance != null)
+		{
+			if (UIController.Instance.ShopControl != null)
+			{
+				return UIController.Instance.ShopControl.isActiveAndEnabled;
+			}
+		}
+
+		return false;
+	}
+
+    private bool IsGamePaused()
+    {
+        if (UIController.Instance.PauseScreen != null)
+        {
+            if (UIController.Instance.PauseScreen.activeSelf == true)
+            {
+                return true;
+            }
+            else
+            {
+				return false;
+			}
         }
 
         return false;
